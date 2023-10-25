@@ -54,9 +54,9 @@ shell> ./mysql_sniffer -p 3306
 ```
 mysql -S /tmp/mysql_mysql8_1.sock test < mysql_packet.log > /dev/null
 ```
-看报错信息。没有报错，就代表SQL是兼容的。
+#### 看报错信息。没有报错，就代表SQL是兼容的。
 
-注：请确保生产环境和测试环境的表结构一致，测试环境不需要任何数据。
+#### 注：请确保生产环境和测试环境的表结构一致，测试环境不需要任何数据。
 
 # 测试
 1） 假定 192.168.1.1 是 MySQL 5.7 / MariaDB，在该机器上运行./mysql_sniffer -p 3306 -c 
