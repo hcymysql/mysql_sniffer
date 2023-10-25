@@ -52,7 +52,7 @@ shell> ./mysql_sniffer -p 3306
 
 #### 抓取1-10分钟数据，然后把mysql_packet.sql文件拷贝到MySQL 8.0测试环境里，然后执行下面的命令：
 ```
-mysql -S /tmp/mysql_mysql8_1.sock test < mysql_packet.log > /dev/null
+mysql -S /tmp/mysql_mysql8_1.sock test < mysql_packet.sql > /dev/null
 ```
 #### 看报错信息。没有报错，就代表SQL是兼容的。
 
