@@ -46,6 +46,10 @@ shell> ./mysql_sniffer -p 3306
 ```
 默认会把线上的SQL语句（select/insert/update/delete）存入mysql_packet.sql文件里。
 
+![image](https://github.com/hcymysql/mysql_sniffer/assets/19261879/7ed20afb-db0e-4e7a-9892-f03ccb34e5aa)
+
+![image](https://github.com/hcymysql/mysql_sniffer/assets/19261879/9a7177ea-3af5-49da-a2f3-c86ad4fb5a89)
+
 #### 抓取1-10分钟数据，然后把mysql_packet.sql文件拷贝到MySQL 8.0测试环境里，然后执行下面的命令：
 ```
 mysql -S /tmp/mysql_mysql8_1.sock test < mysql_packet.log > /dev/null
