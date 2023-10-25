@@ -42,7 +42,11 @@ def parse_mysql_packet(packet):
 def sniff_mysql_packets(port):
     # 创建一个TCPSession对象
     tcp_session = TCPSession()
-    sniff(filter=f"tcp port {port} and tcp[13] == 24", prn=parse_mysql_packet, session=tcp_session)
+    try:
+        sniff(filter=f"tcp port {port} and tcp[13] == 24", prn=parse_mysql_packet, session=tcp_session)
+    except KeyboardInterrupt:
+        print("\nSniffing operation stopped")
+        sys.exit(0)
 
 # 解析命令行参数
 parser = argparse.ArgumentParser(description='MySQL packet sniffer')
@@ -70,5 +74,10 @@ if args.console:
     console_handler.setLevel(logging.INFO)
     logger.addHandler(console_handler)
 
-sniff_mysql_packets(port)
+try:
+    sniff_mysql_packets(port)
+except KeyboardInterrupt:
+    print("\nSniffing operation stopped")
+    sys.exit(0)
+
 
