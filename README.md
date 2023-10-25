@@ -2,7 +2,6 @@ mysql_sniffer 是一个基于 MySQL 协议的抓包工具，用来实时抓取 M
 
 在进行MySQL 8.0升级时，了解新版本对SQL语法的改变和新增的功能是非常重要的。通过使用mysql_sniffer，DBA可以在升级之前对现有的SQL语句进行抓取和分析，以确保在新版本中能够正常运行。
 
-
 有一些已知SQL语法与MySQL 8.0不兼容，例如：
 ```
 select NVL(id/0,'YES') from test.t1 where id = 1;
@@ -25,11 +24,29 @@ mysql_sniffer工具可以帮助你
 
 # 使用方法：
 ```
-shell> chmod 755 mysql_sniffer
-shell> ./mysql_sniffer -p 3306
+usage: mysql_sniffer [-h] -p PORT [-l LOG] [-c] [-v]
+
+MySQL packet sniffer
+
+options:
+  -h, --help            show this help message and exit
+  -p PORT, --port PORT  MySQL server port
+  -l LOG, --log LOG     Log file path
+  -c, --console         Print log to console
+  -v, --version         show program's version number and exit
 ```
 
-1）在生产环境下运行mysql_sniffer，抓取1-10分钟数据，然后把mysql_packet.sql文件拷贝到测试环境里，然后你执行。
+```
+shell> chmod 755 mysql_sniffer
+```
+
+在 MySQL 5.7 或者 MariaDB 机器上执行（SSH的ROOT权限）
+```
+shell> ./mysql_sniffer -p 3306
+```
+默认会把线上的SQL语句（select/insert/update/delete）存入mysql_packet.sql文件里。
+
+#### 抓取1-10分钟数据，然后把mysql_packet.sql文件拷贝到MySQL 8.0测试环境里，然后你执行。
 ```
 mysql -S /tmp/mysql_mysql8_1.sock test < mysql_packet.log > /dev/null
 ```
