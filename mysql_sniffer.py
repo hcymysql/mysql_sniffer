@@ -15,12 +15,9 @@ def parse_mysql_packet(packet):
     if packet.haslayer(TCP) and packet.haslayer(Raw) and packet[TCP].dport == port:
         payload = bytes(packet[Raw].load)
 
-        # Check if this is the first segment of a new query
         if payload[4] == 0x03:
-            # This is the first segment, start a new query
             query = payload[5:]
         else:
-            # This is not the first segment, append it to the current query
             query += payload[5:]
 
         try:
@@ -51,6 +48,7 @@ def sniff_mysql_packets(port):
 parser = argparse.ArgumentParser(description='MySQL packet sniffer')
 parser.add_argument('-p', '--port', type=int, help='MySQL server port', required=True)
 parser.add_argument('-l', '--log', type=str, default='mysql_packet.sql', help='Log file path')
+parser.add_argument('-c', '--console', action='store_true', help='Print log to console')
 parser.add_argument('-v', '--version', action='version', version='mysql_sniffer工具版本号: 1.0.1，更新日期：2023-10-25')
 args = parser.parse_args()
 
@@ -61,15 +59,16 @@ log_file = args.log
 logger = logging.getLogger('mysql_packet_logger')
 logger.setLevel(logging.INFO)
 
-# 创建终端输出处理器
-console_handler = logging.StreamHandler()
-console_handler.setLevel(logging.INFO)
-logger.addHandler(console_handler)
-
 # 创建文件输出处理器
 file_handler = logging.FileHandler(log_file, 'a')
 file_handler.setLevel(logging.INFO)
 logger.addHandler(file_handler)
 
-# 示例用法
+# 如果设置了-c参数，创建并添加终端输出处理器
+if args.console:
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    logger.addHandler(console_handler)
+
 sniff_mysql_packets(port)
+
