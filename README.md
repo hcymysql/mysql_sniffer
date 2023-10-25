@@ -73,6 +73,12 @@ mysql -S /tmp/mysql_mysql8_1.sock test < mysql_packet.sql > /dev/null
 
 3） mysql_sniffer会实时打印出目前运行的SQL语句。
 
+--------------------------------------------
+注：工具适用于 Centos6 和 Centos7 系统。
+
+mysql_sniffer（Centos7）
+
+mysql_sniffer_centos6（Centos6）
 
 
 
