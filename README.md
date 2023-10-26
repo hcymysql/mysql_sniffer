@@ -41,6 +41,8 @@ options:
   -l LOG, --log LOG     Log file path
   -c, --console         Print log to console
   -v, --version         show program's version number and exit
+  -r RUNTIME, --runtime RUNTIME
+                        Runtime of packet sniffing in seconds
 ```
 
 ```
@@ -49,9 +51,9 @@ shell> chmod 755 mysql_sniffer
 
 在 MySQL 5.7 或者 MariaDB 机器上执行（SSH的ROOT权限）
 ```
-shell> ./mysql_sniffer -p 3306
+shell> ./mysql_sniffer -p 3306 -r 60
 ```
-默认会把线上的SQL语句（select/insert/update/delete）存入mysql_packet.sql文件里。
+将会抓取60秒数据（-r 代表抓取的时间，单位秒），默认会把线上的SQL语句（select/insert/update/delete）存入mysql_packet.sql文件里。
 
 ![image](https://github.com/hcymysql/mysql_sniffer/assets/19261879/7ed20afb-db0e-4e7a-9892-f03ccb34e5aa)
 
