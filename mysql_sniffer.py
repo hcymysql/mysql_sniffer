@@ -3,6 +3,7 @@ import argparse
 import logging
 from scapy.all import *
 from datetime import datetime
+import time
 
 # Set Scapy's TCP reassembly limit to unlimited
 conf.contribs['TCPSession'] = {'reassembler': 'nosack'}
@@ -39,21 +40,31 @@ def parse_mysql_packet(packet):
             logger.info(f"{data};")
             logger.info("-- --------------------")
 
-def sniff_mysql_packets(port):
+def sniff_mysql_packets(port, runtime):
+    start_time = time.time()  # 记录抓取开始时间
     # 创建一个TCPSession对象
     tcp_session = TCPSession()
-    try:
-        sniff(filter=f"tcp port {port} and tcp[13] == 24", prn=parse_mysql_packet, session=tcp_session)
-    except KeyboardInterrupt:
-        print("\nSniffing operation stopped")
-        sys.exit(0)
+    while True:
+        # 抓取逻辑
+        
+        # 检查是否达到抓取持续时间
+        elapsed_time = time.time() - start_time
+        if elapsed_time >= runtime:
+            break
+
+        try:
+            sniff(filter=f"tcp port {port} and tcp[13] == 24", prn=parse_mysql_packet, session=tcp_session, timeout=1)
+        except KeyboardInterrupt:
+            print("\nSniffing operation stopped")
+            sys.exit(0)
 
 # 解析命令行参数
 parser = argparse.ArgumentParser(description='MySQL packet sniffer')
 parser.add_argument('-p', '--port', type=int, help='MySQL server port', required=True)
 parser.add_argument('-l', '--log', type=str, default='mysql_packet.sql', help='Log file path')
 parser.add_argument('-c', '--console', action='store_true', help='Print log to console')
-parser.add_argument('-v', '--version', action='version', version='mysql_sniffer工具版本号: 1.0.1，更新日期：2023-10-25')
+parser.add_argument('-v', '--version', action='version', version='mysql_sniffer工具版本号: 1.0.2，更新日期：2023-10-26')
+parser.add_argument('-r', '--runtime', type=int, help='Runtime of packet sniffing in seconds', required=True)
 args = parser.parse_args()
 
 port = args.port
@@ -75,9 +86,8 @@ if args.console:
     logger.addHandler(console_handler)
 
 try:
-    sniff_mysql_packets(port)
+    sniff_mysql_packets(port, args.runtime)
 except KeyboardInterrupt:
     print("\nSniffing operation stopped")
     sys.exit(0)
-
 
