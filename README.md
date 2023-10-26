@@ -25,9 +25,9 @@ select IFNULL(id/0,'YES') from test.t1 where id = 1;
 select user_id,sum(amount) from test.user group by user_id order by user_id DESC limit 10;
 ```
 
-#### 那么，如何判断业务上的未知SQL是否与MySQL 8.0兼容呢？
+### 那么，如何判断业务上的未知SQL是否与MySQL 8.0兼容呢？
 
-#### mysql_sniffer工具可以帮助你
+### mysql_sniffer工具可以帮助你
 
 # 使用方法：
 ```
