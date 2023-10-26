@@ -31,7 +31,7 @@ select user_id,sum(amount) from test.user group by user_id order by user_id DESC
 
 # 使用方法：
 ```
-usage: mysql_sniffer [-h] -p PORT [-l LOG] [-c] [-v]
+usage: mysql_sniffer_centos6 [-h] -p PORT [-l LOG] [-c] [-v] -r RUNTIME
 
 MySQL packet sniffer
 
