@@ -16,11 +16,19 @@ def parse_mysql_packet(packet, table_names):
     queries = ['select', 'insert', 'update', 'delete']
     if packet.haslayer(TCP) and packet.haslayer(Raw) and packet[TCP].dport == port:
         payload = bytes(packet[Raw].load)
-
         if payload[4] == 0x03:
             query = payload[5:]
         else:
-            query += payload[5:]
+            #query += payload[5:]
+            match_user = re.search(b'\x00(\w+)\x00', payload)
+            if match_user:
+                logger.info(f"-- Connect User：{match_user.group(1).decode()}")
+
+            regex = rb'\x00(\w+)\x00'
+            match = re.search(regex, payload[5:])
+            if match:
+                index = match.start()
+                query += payload[5:index]
 
         try:
             data = query.decode('utf-8')
