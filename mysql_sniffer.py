@@ -16,7 +16,7 @@ def parse_mysql_packet(packet, table_names):
     queries = ['select', 'insert', 'update', 'delete', 'call']
     if packet.haslayer(TCP) and packet.haslayer(Raw) and packet[TCP].dport == port:
         payload = bytes(packet[Raw].load)
-        print(payload)
+        #print(payload)
 
         if payload[4] == 0x03:
             query = payload[5:]
@@ -119,3 +119,4 @@ end_time = time.time()  # 记录抓取结束时间
 total_time = end_time - start_time  # 计算抓取总时间
 
 print(f"Packet sniffing completed. Total time: {total_time:.2f} seconds.")
+
