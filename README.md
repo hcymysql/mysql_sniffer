@@ -47,7 +47,7 @@ options:
   -v, --version         show program's version number and exit
 ```
 
-# 参数解释：
+# 参数解释
 ```
 -p 指定端口，MySQL默认3306
 -c 是把抓取到的SQL打印到终端
@@ -84,6 +84,12 @@ mysql -S /tmp/mysql_mysql8_1.sock yourDB < mysql_packet.sql > /dev/null
 1） 假定 192.168.1.1 是 MySQL 5.7 / MariaDB，在该机器上运行./mysql_sniffer -p 3306 -c 
 
 2） 在  192.168.1.2 机器上运行sysbench，模拟出生产环境数据读写。
+```
+shell> sysbench --test=/usr/share/sysbench/tests/include/oltp_legacy/oltp.lua --oltp_tables_count=1
+--mysql-table-engine=innodb --oltp-table-size=100000 --max-requests=0 --max-time=120 --num-threads=12
+--mysql-host=192.168.198.239 --mysql-port=3306  --mysql-user=admin
+--mysql-password=hechunyang  --mysql-db=test  --db-driver=mysql  run
+```
 
 3） mysql_sniffer会实时打印出目前运行的SQL语句。
 
