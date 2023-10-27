@@ -56,7 +56,7 @@ def sniff_mysql_packets(port, table_names, runtime=0):
     try:
         sniff(filter=f"tcp port {port} and tcp[13] == 24", prn=lambda pkt: parse_mysql_packet(pkt, table_names), session=tcp_session, timeout=runtime)
     except KeyboardInterrupt:
-        logger.info("\nSniffing operation stopped")
+        print("\nSniffing operation stopped")
         sys.exit(0)
 
 # 解析命令行参数
@@ -65,8 +65,8 @@ parser.add_argument('-p', '--port', type=int, help='MySQL server port', required
 parser.add_argument('-t', '--tables', nargs='+', help='Table names to capture')
 parser.add_argument('-l', '--log', type=str, default='mysql_packet.sql', help='Log file path')
 parser.add_argument('-c', '--console', action='store_true', help='Print log to console')
-parser.add_argument('-v', '--version', action='version', version='mysql_sniffer工具版本号: 1.0.3，更新日期：2023-10-27')
 parser.add_argument('-r', '--runtime', type=int, help='Runtime of packet sniffing in seconds')
+parser.add_argument('-v', '--version', action='version', version='mysql_sniffer工具版本号: 1.0.3，更新日期：2023-10-27')
 args = parser.parse_args()
 
 port = args.port
@@ -94,18 +94,18 @@ if table_names:
     try:
         sniff_mysql_packets(port, table_names, args.runtime)
     except KeyboardInterrupt:
-        logger.info("\nSniffing operation stopped")
+        print("\nSniffing operation stopped")
         sys.exit(0)
 else:
     logger.info("No table names specified. Capturing all tables...")
     try:
         sniff_mysql_packets(port, [], args.runtime)
     except KeyboardInterrupt:
-        logger.info("\nSniffing operation stopped")
+        print("\nSniffing operation stopped")
         sys.exit(0)
 
 end_time = time.time()  # 记录抓取结束时间
 total_time = end_time - start_time  # 计算抓取总时间
 
-logger.info(f"Packet sniffing completed. Total time: {total_time:.2f} seconds.")
+print(f"Packet sniffing completed. Total time: {total_time:.2f} seconds.")
 
