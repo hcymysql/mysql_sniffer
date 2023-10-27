@@ -31,7 +31,7 @@ select user_id,sum(amount) from test.user group by user_id order by user_id DESC
 
 # 介绍
 ```
-usage: mysql_sniffer [-h] -p PORT [-t TABLES [TABLES ...]] [-l LOG] [-c] [-v] [-r RUNTIME]
+usage: mysql_sniffer [-h] -p PORT [-t TABLES [TABLES ...]] [-l LOG] [-c] [-r RUNTIME] [-v]
 
 MySQL packet sniffer
 
@@ -42,9 +42,9 @@ options:
                         Table names to capture
   -l LOG, --log LOG     Log file path
   -c, --console         Print log to console
-  -v, --version         show program's version number and exit
   -r RUNTIME, --runtime RUNTIME
                         Runtime of packet sniffing in seconds
+  -v, --version         show program's version number and exit
 ```
 
 # 参数解释：
