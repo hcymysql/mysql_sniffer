@@ -13,9 +13,11 @@ query = b''
 
 def parse_mysql_packet(packet, table_names):
     global query
-    queries = ['select', 'insert', 'update', 'delete']
+    queries = ['select', 'insert', 'update', 'delete', 'call']
     if packet.haslayer(TCP) and packet.haslayer(Raw) and packet[TCP].dport == port:
         payload = bytes(packet[Raw].load)
+        print(payload)
+
         if payload[4] == 0x03:
             query = payload[5:]
         else:
@@ -24,12 +26,13 @@ def parse_mysql_packet(packet, table_names):
             if match_user:
                 logger.info(f"-- Connect User：{match_user.group(1).decode()}")
 
+            """
             regex = rb'\x00(\w+)\x00'
             match = re.search(regex, payload[5:])
             if match:
                 index = match.start()
                 query += payload[5:index]
-
+            """
         try:
             data = query.decode('utf-8')
         except UnicodeDecodeError:
@@ -74,7 +77,7 @@ parser.add_argument('-t', '--tables', nargs='+', help='Table names to capture')
 parser.add_argument('-l', '--log', type=str, default='mysql_packet.sql', help='Log file path')
 parser.add_argument('-c', '--console', action='store_true', help='Print log to console')
 parser.add_argument('-r', '--runtime', type=int, help='Runtime of packet sniffing in seconds')
-parser.add_argument('-v', '--version', action='version', version='mysql_sniffer工具版本号: 1.0.3，更新日期：2023-10-27')
+parser.add_argument('-v', '--version', action='version', version='mysql_sniffer工具版本号: 1.0.4，更新日期：2023-10-28')
 args = parser.parse_args()
 
 port = args.port
@@ -116,4 +119,3 @@ end_time = time.time()  # 记录抓取结束时间
 total_time = end_time - start_time  # 计算抓取总时间
 
 print(f"Packet sniffing completed. Total time: {total_time:.2f} seconds.")
-
