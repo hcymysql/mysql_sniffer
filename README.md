@@ -29,15 +29,17 @@ select user_id,sum(amount) from test.user group by user_id order by user_id DESC
 
 ### mysql_sniffer工具可以帮助你
 
-# 使用方法：
+# 介绍
 ```
-usage: mysql_sniffer_centos6 [-h] -p PORT [-l LOG] [-c] [-v] -r RUNTIME
+usage: mysql_sniffer [-h] -p PORT [-t TABLES [TABLES ...]] [-l LOG] [-c] [-v] [-r RUNTIME]
 
 MySQL packet sniffer
 
 options:
   -h, --help            show this help message and exit
   -p PORT, --port PORT  MySQL server port
+  -t TABLES [TABLES ...], --tables TABLES [TABLES ...]
+                        Table names to capture
   -l LOG, --log LOG     Log file path
   -c, --console         Print log to console
   -v, --version         show program's version number and exit
@@ -45,6 +47,16 @@ options:
                         Runtime of packet sniffing in seconds
 ```
 
+# 参数解释：
+```
+-p 指定端口，MySQL默认3306
+-c 是把抓取到的SQL打印到终端
+-t 指定具体的表名，例如只抓取t1，t2，t3这三张表， -t t1 t2 t3 （不支持正则表达式，请写具体的表名）
+-l 抓取的SQL保存在哪个文件里，不指定默认保存在mysql_packet.sql文件里
+-r 抓取多长时间，单位秒
+```
+
+# 使用
 ```
 shell> chmod 755 mysql_sniffer
 ```
