@@ -75,7 +75,8 @@ shell> ./mysql_sniffer -p 3306 -r 60
 ```
 mysql -S /tmp/mysql_mysql8_1.sock yourDB -f < mysql_packet.sql > /dev/null
 ```
-#### 看报错信息。没有报错，就代表SQL是兼容的。
+#### 看报错信息，是否含有（You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax）。
+#### 没有语法错误，就代表SQL是兼容的。
 
 #### 注：请确保生产环境和测试环境的表结构一致，测试环境不需要任何数据。
 
