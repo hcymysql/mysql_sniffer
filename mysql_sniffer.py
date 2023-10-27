@@ -97,7 +97,7 @@ if table_names:
         print("\nSniffing operation stopped")
         sys.exit(0)
 else:
-    logger.info("No table names specified. Capturing all tables...")
+    print("No table names specified. Capturing all tables...")
     try:
         sniff_mysql_packets(port, [], args.runtime)
     except KeyboardInterrupt:
