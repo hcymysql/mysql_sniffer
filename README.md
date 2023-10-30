@@ -76,6 +76,9 @@ options:
 -r 抓取多长时间，单位秒
 ```
 
+# 演示视频
+https://www.douyin.com/video/7295397864006536502
+
 # 使用
 ```
 shell> chmod 755 mysql_sniffer
