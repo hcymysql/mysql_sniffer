@@ -1,5 +1,10 @@
 mysql_sniffer 是一个基于 MySQL 协议的抓包工具，用来实时抓取 MySQL 服务端的请求，并格式化输出，输出内容包括访问用户、访问时间、来源 IP、执行的SQL语句。
 
+```
+mysql_sniffer is a packet capture tool based on the MySQL protocol,used to capture real-time requests from the MySQL server and format the output.
+The output includes user access, access time, source IP, and executed SQL statements.
+```
+
 https://www.oschina.net/p/hcymysql_mysql_sniffer
 
 在进行MySQL 8.0升级时，了解新版本对SQL语法的改变和新增的功能是非常重要的。通过使用mysql_sniffer，DBA可以在升级之前对现有的SQL语句进行抓取和分析，以确保在新版本中能够正常运行。
@@ -9,6 +14,19 @@ https://www.oschina.net/p/hcymysql_mysql_sniffer
 1) 对SQL语法的改变有更深入的了解：MySQL 8.0引入了一些新的SQL语法，也对一些旧的语法进行了修改或弃用。通过mysql_sniffer，DBA可以抓取并分析现有的SQL语句，以确定它们是否会受到这些改变的影响。
 
 2) 发现并解决潜在的问题：如果在新版本中，某些SQL语句无法正常运行，那么通过mysql_sniffer，DBA可以提前发现这些问题，并在升级之前进行修复。
+
+```
+When upgrading to MySQL 8.0, it is crucial to understand the changes and additions to SQL syntax in the new version.
+By using mysql_sniffer, DBAs can capture and analyze existing SQL statements before upgrading to ensure they will function properly in the new version.
+
+The benefits of using mysql_sniffer include:
+
+Deeper understanding of changes to SQL syntax: MySQL 8.0 introduces new SQL syntax and modifies or deprecates some old syntax.
+With mysql_sniffer, DBAs can capture and analyze existing SQL statements to determine if they will be affected by these changes.
+
+Identification and resolution of potential issues: If certain SQL statements cannot function properly in the new version,
+DBAs can identify and resolve these issues earlier by using mysql_sniffer before upgrading.
+```
 
 -------------------------------------------------
 有一些已知SQL语法与MySQL 8.0不兼容，例如：
