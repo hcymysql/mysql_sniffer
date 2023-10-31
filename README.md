@@ -88,7 +88,7 @@ shell> chmod 755 mysql_sniffer
 ```
 shell> ./mysql_sniffer -p 3306 -r 60
 ```
-将会抓取60秒数据（-r 代表抓取的时间，单位秒），默认会把线上的SQL语句（select/insert/update/delete）存入mysql_packet.sql文件里。
+将会抓取60秒数据（-r 代表抓取的时间，单位秒），默认会把线上的SQL语句（select/insert/update/delete/call）存入mysql_packet.sql文件里。
 
 ![image](https://github.com/hcymysql/mysql_sniffer/assets/19261879/7ed20afb-db0e-4e7a-9892-f03ccb34e5aa)
 
