@@ -112,7 +112,7 @@ mysql -S /tmp/mysql_mysql8_1.sock yourDB -f < mysql_packet.sql > /dev/null
 ```
 shell> sysbench --test=/usr/share/sysbench/tests/include/oltp_legacy/oltp.lua --oltp_tables_count=1
 --mysql-table-engine=innodb --oltp-table-size=100000 --max-requests=0 --max-time=120 --num-threads=12
---mysql-host=192.168.198.239 --mysql-port=3306  --mysql-user=admin
+--mysql-host=192.168.1.1 --mysql-port=3306  --mysql-user=admin
 --mysql-password=hechunyang  --mysql-db=test  --db-driver=mysql  run
 ```
 
