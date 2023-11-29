@@ -16,6 +16,8 @@ https://www.oschina.net/p/hcymysql_mysql_sniffer
 
 2) 发现并解决潜在的问题：如果在新版本中，某些SQL语句无法正常运行，那么通过mysql_sniffer，DBA可以提前发现这些问题，并在升级之前进行修复。
 
+3) 数据库割接、迁移时，使用 mysql_sniffer 可以方便地判断原主库是否还有业务访问。通过 mysql_sniffer ，你可以截获数据库的查询语句、事务操作等信息，并进行分析。如果在割接或迁移过程中，没有新的业务请求经过原主库，那么可以判断原主库可以正常下线。
+
 ```
 When upgrading to MySQL 8.0, it is crucial to understand the changes and additions to SQL syntax in the new version.
 By using mysql_sniffer, DBAs can capture and analyze existing SQL statements before upgrading to ensure they will function properly in the new version.
