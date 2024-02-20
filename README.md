@@ -1,4 +1,4 @@
-mysql_sniffer 是一个基于 MySQL 协议的抓包工具，用来实时抓取 MySQL 服务端的请求，并格式化输出，输出内容包括访问用户、访问时间、来源 IP、执行的SQL语句。
+# mysql_sniffer 是一个基于 MySQL 协议的抓包工具，用来实时抓取 MySQL 服务端的请求，并格式化输出，输出内容包括访问用户、访问时间、来源 IP、执行的SQL语句。
 
 ```
 mysql_sniffer is a packet capture tool based on the MySQL protocol,
